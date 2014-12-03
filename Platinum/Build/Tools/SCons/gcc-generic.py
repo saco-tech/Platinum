@@ -4,14 +4,13 @@ def generate(env, gcc_cross_prefix=None, gcc_strict=True, gcc_stop_on_warning=No
     if gcc_stop_on_warning == None: gcc_stop_on_warning = env['stop_on_warning']
  
     ### compiler flags
-    env.AppendUnique(CFLAGS = ['-fPIC'])
     if gcc_strict:
         env.AppendUnique(CCFLAGS = ['-pedantic', '-Wall',  '-W',  '-Wundef', '-Wno-long-long'])
         env.AppendUnique(CFLAGS  = ['-Wmissing-prototypes', '-Wmissing-declarations'])
     else:
         env.AppendUnique(CCFLAGS = ['-Wall'])
     
-    compiler_defines = ['-D_REENTRANT']
+    compiler_defines = ['-fPIC', '-D_REENTRANT']
     env.AppendUnique(CCFLAGS  = compiler_defines)
     env.AppendUnique(CPPFLAGS = compiler_defines)
     
